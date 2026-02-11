@@ -1,0 +1,257 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    color: #fff;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.3) 0%, transparent 70%);
+    top: -250px;
+    right: -250px;
+    animation: float 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(118, 75, 162, 0.3) 0%, transparent 70%);
+    bottom: -200px;
+    left: -200px;
+    animation: float 10s ease-in-out infinite reverse;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(50px, 50px); }
+}
+
+
+.sidebar {
+    width: 260px;
+    background: linear-gradient(180deg, #0f3460 0%, #16213e 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 20;
+}
+
+.sidebar-header {
+    padding: 30px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header h1 {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+}
+
+.sidebar-nav {
+    flex: 1;
+    padding: 20px 0;
+    overflow-y: auto;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    text-decoration: none;
+}
+
+.nav-item:hover, .nav-item.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border-left-color: #4a90e2;
+}
+
+.nav-item i {
+    font-size: 1.3em;
+    width: 30px;
+    margin-right: 10px;
+}
+
+.nav-item span {
+    font-weight: 500;
+}
+
+
+.outergrid {
+    display: block;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.main-content {
+    padding: 40px;
+    overflow-y: auto;
+    margin-left: 260px;
+    position: relative;
+    z-index: 1;
+}
+
+.main-content h1 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    perspective: 1200px;
+    cursor: pointer;
+}
+
+.inner-card {
+    width: 100%;
+    height: 240px;
+    border-radius: 16px;
+    transition: transform 0.7s ease;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.card.flipped .inner-card {
+    transform: rotateY(180deg);
+}
+
+.front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 25px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.front {
+    background: #FAD1D1;
+    color: #1a1a2e;
+}
+
+.front .icon {
+    font-size: 42px;
+    margin-bottom: 15px;
+    opacity: 0.95;
+    color: #1a1a2e;
+}
+
+.front .card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.front .card-text {
+    opacity: 0.9;
+    font-size: 0.95rem;
+}
+
+.back {
+    background: #2c3e50;
+    transform: rotateY(180deg);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.g1 { background: #bdb1da; }
+.g2 { background: #FFBCB3; }
+.g3 { background: #95c7b5; }
+.g4 { background: #FAD1D1; }
+.g5 { background: #fadfed; }
+.g6 { background: #ffe68d; }
+
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 80px;
+    }
+    
+    .sidebar-header h1 {
+        font-size: 1.2em;
+    }
+    
+    .nav-item span {
+        display: none;
+    }
+    
+    .nav-item {
+        justify-content: center;
+        padding: 15px 10px;
+    }
+    
+    .nav-item i {
+        margin-right: 0;
+    }
+    
+    .main-content {
+        margin-left: 80px;
+        padding: 20px;
+    }
+    
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .inner-card {
+        height: 220px;
+    }
+    
+    .front .icon {
+        font-size: 36px;
+    }
+    
+    .front .card-title {
+        font-size: 1.1rem;
+    }
+    
+    .back {
+        font-size: 0.95rem;
+    }
+}
